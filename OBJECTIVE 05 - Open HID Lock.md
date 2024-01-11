@@ -4,7 +4,7 @@
 >Open the HID lock in the Workshop. Talk to Bushy Evergreen near the talk tracks for hints on this challenge. You may also visit Fitzy Shortstack in the kitchen for tips.
 #  
 
-## Hints ##
+## HINTS ##
 <details>
   <summary>Hints provided for Objective 5</summary>
  
