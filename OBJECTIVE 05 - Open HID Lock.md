@@ -1,6 +1,6 @@
 # Objective 5 – Open HID Lock #
 
-##OBJECTIVE:##
+## OBJECTIVE:##
 >Open the HID lock in the Workshop. Talk to Bushy Evergreen near the talk tracks for hints on this challenge. You may also visit Fitzy Shortstack in the kitchen for tips.
 #  
 
