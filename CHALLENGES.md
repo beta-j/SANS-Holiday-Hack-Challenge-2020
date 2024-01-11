@@ -429,5 +429,110 @@ function cleansum(arg) {
   return total
 }
 ```
- 
+
+#  
+#  
+#  
+
+# CHALLENGE 10 - Scapy Prepper #
+
+## PROCEDURE : ##
+```
+>>> task.submit(‘start’)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/3472b17a-28aa-4aa4-b3bf-9b8a4ad48080)
+
+```
+>>> task.submit(send)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/eb2e1f5a-b415-470f-9a48-d2750416c81e)
+
+```
+>>> task.submit(sniff)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/b247f751-5918-4c16-b2b5-3474610ecdd0)
+
+```
+>>> task.submit(1)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/69246802-c521-4b1e-8df1-101e08f95103)
+
+```
+>>> task.submit(rdpcap)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/e80faf00-4717-4ae8-a743-d433d20ab04b)
+
+```
+>>> task.submit(2)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/27214a0d-71a5-4aa9-a154-7383c3479dc4)
+
+```
+>>> task.submit(UDP_PACKETS[0])
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/bee60799-a9c9-45e9-98fe-3523f23e05f2)
+
+```
+>>> task.submit(TCP_PACKETS[1][TCP])
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/72c12472-981d-49a6-8b4e-db01b9f53414)
+
+```
+>>> UDP_PACKETS[0][IP].src = “127.0.0.1”
+>>> task.submit(UDP_PACKETS[0])
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/192e0d9c-038e-461e-99f6-3e7816c0f86d)
+ 
+By running ``>>> TCP_PACKETS.show()`` we find which packets in the list have a raw payload:
+
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/6c7e2e5c-1fda-4455-a23b-6ea85e5de45b)
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/a0031c04-f644-415d-8f17-02514b299dd7)
+
+```
+>>> task.submit(‘PASS echo’)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/8789bc14-aadb-4b37-9a3b-6048258e6a2f)
+
+```
+>>> task.submit(ICMP_PACKETS[1][ICMP].chksum)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/c04fd2ab-3a07-41ef-b3a6-65aa72b1849f)
+
+``` 
+>>> task.submit(3)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/7bbb11e0-af93-4215-9332-2c2f7d36b32f)
+
+``` 
+>>> pkt = Ether()/IP(dst=”127.127.127.127”)/UDP(dport=5000)
+>>> task.submit(pkt)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/9fe50c4d-0ed6-4054-b5af-d16f40cd5168)
+
+``` 
+>>> dns_query = IP(dst=”127.2.3.4”)/UDP(dport=53)/DNS(qd=DNSQR(qname=”elveslove.santa”))
+>>> task.submit(dns_query)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/4bbe74bb-762b-4417-a4cc-d492abe0bf2f)
+
+ 
+If we look at and compare `ARP_PACKETS[0][ARP]` and `ARP_PACKETS[1][ARP]` we can see that the ARP reply has incorrect `op`, `hwsrc` and `hwdst` values.
+
+`op` should be `2` since it is an ARP reply so:
+```
+>>> ARP_PACKETS[1][ARP].op=2
+```
+
+
+`hwdst` should be the MAC of the machine that made the ARP request so:
+```
+>>> ARP_PACKETS[1][ARP].hwdst=”00:16:ce:6e:8b:24”
+```
+
+`hwsrc` should be the MAC address for `192.168.0.1`.  If we run `ARP_PACKETS[1]` we can see the Ethernet encapsulation of the ARP response which includes the MAC address.  So:
+```
+>>> ARP_PACKETS[1][ARP].hwsrc=”00:13:46:0b:22:ba”
+>>> task.submit(ARP_PACKETS)
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/190b793a-40f3-459a-b4fb-644d86195e86)
 
