@@ -4,7 +4,7 @@
 >Help Noel Boetie fix the Tag Generator in the Wrapping Room. What value is in the environment variable `GREETZ`? Talk to Holly Evergreen in the kitchen for help with this.
 #  
 
-## Hints ##
+## HINTS ##
 <details>
   <summary>Hints provided for Objective 8</summary>
  
