@@ -4,7 +4,7 @@
 >Access the Splunk terminal in the Great Room. What is the name of the adversary group that Santa feared would attack KringleCon?
 #  
 
-## Hints ##
+## HINTS ##
 <details>
   <summary>Hints provided for Objective 6</summary>
  
