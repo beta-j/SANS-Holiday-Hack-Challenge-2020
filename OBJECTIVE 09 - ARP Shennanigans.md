@@ -74,7 +74,7 @@ udp=UDP(dport=12773,sport=53)
       an=DNSRR(rrname=packet[DNS].qd.qname, ttl=10, rdata=ipaddr)
     )
 ```
-To figure out this last bit I had to resort to asking for help on Discord.  **@elakamarcus#5519** helped me out a lot by pointing me towards [a nice script](https://www.cs.dartmouth.edu/~sergey/netreads/local/reliable-dns-spoofing-with-python-scapy-nfqueue.html) online which I used for reference . 
+To figure out this last bit I had to resort to asking for help on Discord.  **@elakamarcus#5519** helped me out a lot by pointing me towards [a nice script](https://www.cs.dartmouth.edu/~sergey/netreads/local/reliable-dns-spoofing-with-python-scapy-nfqueue.html) online which I used for reference to create my own scipts; [arp_resp.py](code/arp_resp.py) and [dns_resp.py](code/dns_resp.py). 
 
 With the scripts ready I started ``tcpdump –nni eth0 –w outfile.pcap`` in one terminal then ran ``./dns_resp.py`` in another terminal and left it running.  Finally I ran ``./arp_resp.py`` in the third terminal and this generated the ARP response we did previously, and then a DNS response to the request that was triggered.  
 
