@@ -4,7 +4,7 @@
 >Jack Frost is somehow inserting malicious messages onto the sleigh's CAN-D bus. We need you to exclude the malicious messages and no others to fix the sleigh. Visit the NetWars room on the roof and talk to Wunorse Openslae for hints.
 #  
 
-## Hints ##
+## HINTS ##
 <details>
   <summary>Hints provided for Objective 7</summary>
  
