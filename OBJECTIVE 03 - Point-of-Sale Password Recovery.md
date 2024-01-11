@@ -6,7 +6,7 @@
 
 ## HINTS: ##
 <details>
-  <summary>Hints provided for Objective 1</summary>
+  <summary>Hints provided for Objective 3</summary>
   
 >-  **SUGARPLUM MARY:** There are [tools](https://www.npmjs.com/package/asar) and [guides](https://medium.com/how-to-electron/how-to-get-source-code-of-any-electron-application-cbb5c7726c37) explaining how to extract ASAR from Electron apps.
 >-	**SUGARPLUM MARY:** It's possible to extract the source code from an Electron app.
