@@ -31,7 +31,7 @@ I used the commented part in `naughty_nice.py` to create a [python script](code/
 
 I modified the same script slightly to dump the corresponding files and I got `129459.bin` and `129459.pdf`.
 
-Opening the pdf with a hex editor we see a plaintext saying `/Type/Catalog/_Go_Away/Santa/Pages 2`
+[Opening the pdf](assets/KringleKon3_2020_PosTShelL.pdf) with a hex editor we see a plaintext saying `/Type/Catalog/_Go_Away/Santa/Pages 2`
 ![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/e23c61c6-2b08-4802-bb1d-45d3c25c6175)
 
 This reminded me of one particular [slide](https://speakerdeck.com/ange/colltris?slide=112) in the [Colltris deck](https://speakerdeck.com/ange/colltris).  So following its advice, I changed the value following `pages` from `2` to `3`.
