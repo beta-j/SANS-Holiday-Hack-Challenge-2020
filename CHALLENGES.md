@@ -123,27 +123,119 @@ $ exit
 #  
 #  
 
-# CHALLENGE 2 - Grepping for Gold #
-
-## OBJECTIVE : ##
->Howdy howdy!  Mind helping me with this homew- er, challenge?
->Someone ran `nmap –oG` on a big network and produced this `bigscan.gnmap` file.  The `quizme` program has the questions and hints, and incidentally, has NOTHING to do with an Elf University assignment. Thanks!
-
-#  
+# CHALLENGE 2 - Unescape Tmux #
 
 ## HINTS: ##
 <details>
-  <summary>Hints provided for Objective 13</summary>
+  <summary>Hints provided for Challenge 2</summary>
   
->-	Check [this](https://ryanstutorials.net/linuxtutorial/cheatsheetgrep.php) out if you need a grep refresher.
+>-	**PEPPER MINSTIX:** There's a handy tmux reference available at [https://tmuxcheatsheet.com/](https://tmuxcheatsheet.com/)!
 
 </details>
 
   
 ## PROCEDURE : ##
 
->-	**Q:** What port does 34.76.1.22 have open?
+Have a look at [https://tmuxcheatsheet.com/](https://tmuxcheatsheet.com/) and in the terminal enter the following command:
+
 ```
-elf@e49df7806f10:~$ cat bigscan.gnmap | grep 34.76.1.22
-Host: 34.76.1.22 ()     Status: Up
-Host: 34.76.1.22 ()     Ports: 62078/open/tcp//iphone-syn
+$ tmux attach-session
+```
+
+
+#  
+#  
+#  
+
+# CHALLENGE 3 - Kringle Kiosk #
+
+## HINTS: ##
+<details>
+  <summary>Hints provided for Challenge 3</summary>
+  
+>-	**SHINNY UPATREE:** There's probably some kind of [command injection](https://owasp.org/www-community/attacks/Command_Injection) vulnerability in the menu terminal.
+</details>
+
+  
+## PROCEDURE : ##
+The hint pretty much points us in the right direction immediatley and the link within it explicity explains what needs to be done.
+
+When prompted I selected menu item **4. Print Name Badge** which accepts free text input and kindly asks you to avoid special characters as *“they cause some weird errors”*.  I disobeyed this and entered ``;/bin/bash`` and that got me to a bash prompt.
+
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/16373a6a-11bd-415e-8dd3-60f3e9006525)
+
+#  
+#  
+#  
+
+# CHALLENGE 4 - 33.6Kbps #
+
+
+## PROCEDURE : ##
+Dial `7568347` followed by the following sounds (in order):
+-	Baa DEE brrr
+-	Aaah
+-	WEWEWwrwrrwrr
+-	beDURRdunditty
+-	SCHHRRHHRTHRTR
+
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/02882da2-8533-46db-bb7b-5352ff4acd99)
+
+#  
+#  
+#  
+
+# CHALLENGE 5 - Regex Game #
+
+## HINTS: ##
+<details>
+  <summary>Hints provided for Challenge 5</summary>
+  
+>-	**MINTY CANDYCANE:** Here's a place to try out your JS Regex expressions: [https://regex101.com/](https://regex101.com/)
+>-	**MINTY CANDYCANE:** Handy quick reference for JS regular expression construction: [https://www.debuggex.com/cheatsheet/regex/javascript](https://www.debuggex.com/cheatsheet/regex/javascript)
+
+</details>
+
+  
+## PROCEDURE : ##
+>1.	Matches at least one digit:
+```
+\d
+```
+
+>2.	Matches 3 alpha a-z cahracters ignoring case:
+```
+[a-zA-Z]{3}
+```
+
+>3.	Matches 2 chars of lowercase a-z or numbers:
+```
+[a-z0-9]{2}
+```
+
+>4.	Matches any 2 chars not uppercase A-L or 1-5
+```
+[^A-L1-5]{2}
+```
+
+>5.	Matches three or more digits only
+```
+^[0-9]{3,}$
+```
+
+>6.	Matches multiple hour:minute:second formats only
+```
+^(2[0-3]|[01]?[0-9]):([0-5][0-9]):([0-5]?[0-9])$
+```
+
+>7.	Matches MAC address format only while ignoring case
+```
+^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$
+```
+
+>8.	Matches multiple day,month, and year date formats only
+```
+^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$
+```
+
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/29f40143-dfe3-465c-ae8d-bc0098d77c52)
