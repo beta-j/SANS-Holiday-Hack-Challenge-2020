@@ -239,3 +239,29 @@ Dial `7568347` followed by the following sounds (in order):
 ```
 
 ![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/29f40143-dfe3-465c-ae8d-bc0098d77c52)
+
+#  
+#  
+#  
+
+# CHALLENGE 6 - Speaker Door Open #
+
+## HINTS: ##
+<details>
+  <summary>Hints provided for Challenge 6</summary>
+  
+>-	**BUSHY EVERGREEN:**  The `strings` command is common in Linux and available in Windows as part of `SysInternals`.
+
+</details>
+
+  
+## PROCEDURE : ##
+Run `strings door` – this returns clear text from within the binary file
+
+I notice this part:
+
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/4853e821-d886-4af4-90be-743438d225d8)
+
+Well that’s a convenient reminder ``And don’t forget, the password is`` **``“Op3nTheD00r”``**
+![image](https://github.com/beta-j/SANS-Holiday-Hack-Challenge-2020/assets/60655500/a32c3ab0-1814-46bb-89e0-7abfa43acd4e)
+
