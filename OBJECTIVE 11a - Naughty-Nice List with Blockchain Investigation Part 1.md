@@ -21,7 +21,7 @@ So I start by downloading the toolkit and it looks like it’s something I need 
 Great I have little to no experience with Docker!
 
 Eventually I figure it out
-```
+```console
 # sudo apt-get install docker-ce
 # docker build --tag=”sanshh:Dockerfile” /root/objective11a/dockerbuild/
 ```
